@@ -19,6 +19,7 @@ spring:
         jwt:
           public-key-location: classpath:/store/key/public-key.pem
   jackson:
+    property-naming-strategy: SNAKE_CASE
     deserialization:
       FAIL_ON_UNKNOWN_PROPERTIES: true
       FAIL_ON_IGNORED_PROPERTIES: true

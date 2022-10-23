@@ -6,6 +6,7 @@ create table user
     password    varchar(255) not null,
     uuid        varchar(255) not null,
     date_create datetime     not null,
+    date_update datetime     not null,
 
     primary key (id)
 ) engine = InnoDB default charset = utf8;

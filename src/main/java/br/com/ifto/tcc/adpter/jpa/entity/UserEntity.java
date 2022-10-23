@@ -11,7 +11,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Entity
@@ -36,9 +38,14 @@ public class UserEntity {
   private String email;
 
   @Column(nullable = false)
+  @Setter
   private String password;
 
   @CreationTimestamp
   @Column(nullable = false, columnDefinition = "date_create")
   private OffsetDateTime dateCreate;
+
+  @UpdateTimestamp
+  @Column(nullable = false, columnDefinition = "date_update")
+  private OffsetDateTime dateUpdate;
 }
