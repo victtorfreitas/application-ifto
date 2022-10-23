@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import br.com.ifto.tcc.adpter.http.dto.request.NewUserRequest;
 import br.com.ifto.tcc.adpter.http.dto.response.UserResponse;
 import br.com.ifto.tcc.adpter.http.mapper.UserMapper;
+import br.com.ifto.tcc.core.port.UserAuthenticatedPort;
 import br.com.ifto.tcc.core.port.UserValidatePort;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   private final UserValidatePort userValidatePort;
+  private final UserAuthenticatedPort userAuthenticatedPort;
   private final UserMapper userMapper;
 
   @PostMapping
   @ResponseStatus(CREATED)
   public UserResponse createNewUser(@RequestBody @Valid NewUserRequest userRequest) {
-    log.info("Initialing flow create user {}", userRequest);
+    log.info("Initialing flow create user {} by USER_ID: {}", userRequest,
+        userAuthenticatedPort.getUserId());
     final var user = userValidatePort.validateUser(userMapper.convert(userRequest));
     return userMapper.convert(user);
   }
