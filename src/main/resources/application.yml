@@ -1,0 +1,24 @@
+server:
+  port: 10001
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/application_ifto?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: ${user}
+    password: ${password}
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: true
+    show-sql: true
+  flyway:
+    locations: classpath:db/migration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:/store/key/public-key.pem
+
+token:
+  secret:
+    key: ${TOKEN_SECRET_KEY}
