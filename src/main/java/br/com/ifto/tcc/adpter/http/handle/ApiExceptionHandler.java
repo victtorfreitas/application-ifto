@@ -1,6 +1,7 @@
 package br.com.ifto.tcc.adpter.http.handle;
 
 import br.com.ifto.tcc.adpter.http.handle.Problem.Type;
+import br.com.ifto.tcc.core.exception.PasswordOldInvalidException;
 import br.com.ifto.tcc.core.exception.UserEmailAlreadyUsedException;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -61,6 +62,26 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     String detail = ex.getMessage();
     var typeErro = Type.EMAIL_ALREADY_USED;
+
+    Problem problem = Problem.builder()
+        .title(typeErro.getTitle())
+        .type(typeErro)
+        .detail(detail)
+        .userMessage(detail)
+        .timestamp(OffsetDateTime.now())
+        .build();
+
+    return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+  }
+
+  @ExceptionHandler(PasswordOldInvalidException.class)
+  public ResponseEntity<?> handleUserEmailAlreadyUsedException(PasswordOldInvalidException ex,
+      WebRequest request) {
+
+    HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+
+    String detail = ex.getMessage();
+    var typeErro = Type.CURRENT_PASSWORD_INVALID;
 
     Problem problem = Problem.builder()
         .title(typeErro.getTitle())

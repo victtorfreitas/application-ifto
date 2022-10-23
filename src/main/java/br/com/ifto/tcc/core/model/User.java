@@ -9,10 +9,16 @@ import lombok.ToString;
 @Builder
 public class User {
 
-  private final UUID uuid = UUID.randomUUID();
+  private String uuid;
   private String name;
   private String email;
 
   @ToString.Exclude
   private String password;
+
+  public String getUuidStartUp() {
+    final var uuid = UUID.randomUUID().toString();
+    this.uuid = uuid;
+    return uuid;
+  }
 }

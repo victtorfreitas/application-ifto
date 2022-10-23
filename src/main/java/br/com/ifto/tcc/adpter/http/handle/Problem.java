@@ -28,10 +28,11 @@ public class Problem {
 
   @Getter
   @AllArgsConstructor
-  public static enum Type {
+  public enum Type {
     FIELD_REQUIRED("Field is required"),
     INVALID_FIELDS("Invalid fields"),
-    EMAIL_ALREADY_USED("Email already used");
+    EMAIL_ALREADY_USED("Email already used"),
+    CURRENT_PASSWORD_INVALID("Current password is invalid");
 
     private final String title;
   }

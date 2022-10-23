@@ -23,7 +23,7 @@ public class UserMapper {
 
   public UserResponse convert(User user) {
     return UserResponse.builder()
-        .id(user.getUuid().toString())
+        .id(user.getUuid())
         .email(user.getEmail())
         .name(user.getName())
         .build();
